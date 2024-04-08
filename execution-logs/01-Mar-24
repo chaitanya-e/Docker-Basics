@@ -1,0 +1,421 @@
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker build -t getting-started .
+[+] Building 24.2s (13/13) FINISHED                                                                                                          docker:default
+ => [internal] load build definition from Dockerfile                                                                                                   0.0s
+ => => transferring dockerfile: 188B                                                                                                                   0.0s
+ => resolve image config for docker.io/docker/dockerfile:1                                                                                             3.3s
+ => [auth] docker/dockerfile:pull token for registry-1.docker.io                                                                                       0.0s
+ => CACHED docker-image://docker.io/docker/dockerfile:1@sha256:ac85f380a63b13dfcefa89046420e1781752bab202122f8f50032edf31be0021                        0.0s
+ => [internal] load metadata for docker.io/library/node:18-alpine                                                                                      2.9s
+ => [auth] library/node:pull token for registry-1.docker.io                                                                                            0.0s
+ => [internal] load .dockerignore                                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                                        0.0s
+ => [1/4] FROM docker.io/library/node:18-alpine@sha256:ca9f6cb0466f9638e59e0c249d335a07c867cd50c429b5c7830dda1bed584649                                4.7s
+ => => resolve docker.io/library/node:18-alpine@sha256:ca9f6cb0466f9638e59e0c249d335a07c867cd50c429b5c7830dda1bed584649                                0.0s
+ => => sha256:b32c0114bba5af3e85af37dbc23b1e026850aba590099b81bf75946327b3a9e8 2.34MB / 2.34MB                                                         0.7s
+ => => sha256:ca9f6cb0466f9638e59e0c249d335a07c867cd50c429b5c7830dda1bed584649 1.43kB / 1.43kB                                                         0.0s
+ => => sha256:affdf979bd8ec516bf189d451b8ac68dd50adc49adc4c4014963556c11efeda4 1.16kB / 1.16kB                                                         0.0s
+ => => sha256:24d8fcd7167fb06e91dc7228311105013dc042f6875ff2528ff7a41c04770112 7.14kB / 7.14kB                                                         0.0s
+ => => sha256:4abcf20661432fb2d719aaf90656f55c287f8ca915dc1c92ec14ff61e67fbaf8 3.41MB / 3.41MB                                                         0.6s
+ => => sha256:e7ced292c644a1f7bc776dcc401164b67c9224f8592cc83b8c42e237668a0c7f 40.25MB / 40.25MB                                                       3.5s
+ => => extracting sha256:4abcf20661432fb2d719aaf90656f55c287f8ca915dc1c92ec14ff61e67fbaf8                                                              0.1s
+ => => sha256:f3748d9674b0ca905fe23e1cb4ad0e49d6a605dbbfb9d0cf485f300a03f1eeff 450B / 450B                                                             0.9s
+ => => extracting sha256:e7ced292c644a1f7bc776dcc401164b67c9224f8592cc83b8c42e237668a0c7f                                                              0.8s
+ => => extracting sha256:b32c0114bba5af3e85af37dbc23b1e026850aba590099b81bf75946327b3a9e8                                                              0.0s
+ => => extracting sha256:f3748d9674b0ca905fe23e1cb4ad0e49d6a605dbbfb9d0cf485f300a03f1eeff                                                              0.0s
+ => [internal] load build context                                                                                                                      0.0s
+ => => transferring context: 13.21kB                                                                                                                   0.0s
+ => [2/4] WORKDIR /app                                                                                                                                 0.9s
+ => [3/4] COPY . .                                                                                                                                     0.1s
+ => [4/4] RUN yarn install --production                                                                                                               11.3s
+ => exporting to image                                                                                                                                 0.6s
+ => => exporting layers                                                                                                                                0.6s
+ => => writing image sha256:27b88ebaee9b8f7fe98158e4718b48dab07d94fa04999992ff6c57c1799f5272                                                           0.0s
+ => => naming to docker.io/library/getting-started                                                                                                     0.0s
+
+View build details: docker-desktop://dashboard/build/default/default/x63wy0ugl3gxxr5tqi9urdymg
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker run -dp 127.0.0.1:3000:3000 getting-started
+1057b04826608762c5cc80b6c149ae8c85d56cd2152d5e42f7473d1a142780f9
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker ps
+CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS          PORTS                      NAMES
+1057b0482660   getting-started   "docker-entrypoint.s…"   19 minutes ago   Up 19 minutes   127.0.0.1:3000->3000/tcp   loving_volhard
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker stop 1057b0482660
+1057b0482660
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker rm 1057b0482660
+1057b0482660
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker run -dp 127.0.0.1:3000:3000 getting-started
+278a119ed3aa0595a12518a1d5906451daa36ce9335d7bd9fb3a2d9b8b25f0bc
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker ps
+CONTAINER ID   IMAGE             COMMAND                  CREATED         STATUS         PORTS                      NAMES
+278a119ed3aa   getting-started   "docker-entrypoint.s…"   3 seconds ago   Up 3 seconds   127.0.0.1:3000->3000/tcp   affectionate_ganguly
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt && tail -f /dev/null"
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+01007420e9b0: Pull complete
+Digest: sha256:f9d633ff6640178c2d0525017174a688e2c1aef28f0a0130b26bd5554491f0da
+Status: Downloaded newer image for ubuntu:latest
+35c46324a2189240c0a379c2e5524115445649d16035631490ed5ae471284511
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker exec 35c46324a2189240c0a379c2e5524115445649d16035631490ed5ae471284511 cat /data.txt
+8730
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker run -it ubuntu ls /
+bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker run -it ubuntu ls ltr
+ls: cannot access 'ltr': No such file or directory
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker rm -f 35c46324a2189240c0a379c2e5524115445649d16035631490ed5ae471284511
+35c46324a2189240c0a379c2e5524115445649d16035631490ed5ae471284511
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker ps
+CONTAINER ID   IMAGE             COMMAND                  CREATED         STATUS         PORTS                      NAMES
+278a119ed3aa   getting-started   "docker-entrypoint.s…"   9 minutes ago   Up 9 minutes   127.0.0.1:3000->3000/tcp   affectionate_ganguly
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker volume create todo-db
+todo-db
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker rm -f todo-db
+Error response from daemon: No such container: todo-db
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker rm -f 278a119ed3aa
+278a119ed3aa
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker run -dp 127.0.0.1:3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started
+4f254028df7645f267e529d7b910d7fdb53e2d8115323a877e2799d1f5458b84
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker rm -f 4f254028df7645f267e529d7b910d7fdb53e2d8115323a877e2799d1f5458b84
+4f254028df7645f267e529d7b910d7fdb53e2d8115323a877e2799d1f5458b84
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker run -dp 127.0.0.1:3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started
+87272c17af29af93aadb72fb43b5c6f34de5d9f5ee136d3510b629b31f34c046
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker volume inspect todo-db
+[
+    {
+        "CreatedAt": "2024-03-01T10:20:35Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/todo-db/_data",
+        "Name": "todo-db",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker network create todo-app
+d1f8af531524f599075463dcc493ef289fa386aa5b3690c4ad98c8b1f2630f6d
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker run -d ^
+More?     --network todo-app --network-alias mysql ^
+More?     -v todo-mysql-data:/var/lib/mysql ^
+More?     -e MYSQL_ROOT_PASSWORD=secret ^
+More?     -e MYSQL_DATABASE=todos ^
+More?     mysql:8.0
+Unable to find image 'mysql:8.0' locally
+8.0: Pulling from library/mysql
+81badc5f380f: Pull complete
+6a81d7aa4708: Pull complete
+a7d2a50df679: Pull complete
+4b16e7be1767: Pull complete
+3205e7b85ef5: Pull complete
+d8b021d6b4e1: Pull complete
+8df9a740b0d6: Pull complete
+734b576d7682: Pull complete
+c88d6cb0b217: Pull complete
+20e828a3ad27: Pull complete
+fb468cb0f95b: Pull complete
+Digest: sha256:17326312dfb4eab40db4adeb94e853806c5b361caf80e5089bc37732077e2bec
+Status: Downloaded newer image for mysql:8.0
+a2f7f0c72999f40fd963aa75148bb3b1e13a84291d2ba523cbcce3df1d181527
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker exec -it a2f7f0c72999f40fd963aa75148bb3b1e13a84291d2ba523cbcce3df1d181527 mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| todos              |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> exit
+Bye
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker ps
+CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS          PORTS                      NAMES
+a2f7f0c72999   mysql:8.0         "docker-entrypoint.s…"   7 minutes ago    Up 7 minutes    3306/tcp, 33060/tcp        boring_cannon
+87272c17af29   getting-started   "docker-entrypoint.s…"   28 minutes ago   Up 28 minutes   127.0.0.1:3000->3000/tcp   practical_wright
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker run -it --network todo-app nicolaka/netshoot
+Unable to find image 'nicolaka/netshoot:latest' locally
+latest: Pulling from nicolaka/netshoot
+661ff4d9561e: Already exists
+995df079f4e4: Pull complete
+dd60ddc09193: Pull complete
+db21b8384e68: Pull complete
+0c4b97b7a9f6: Pull complete
+ab55214c6c7f: Pull complete
+605fbab30112: Pull complete
+4f4fb700ef54: Pull complete
+ccf5fa44d580: Pull complete
+bd3e8b5a2d54: Pull complete
+76daa6c53003: Pull complete
+f32b561aa773: Pull complete
+b72ad7310ef5: Pull complete
+a06bebda965d: Pull complete
+a1436cccfd44: Pull complete
+Digest: sha256:b569665f0c32391b93f4de344f07bf6353ddff9d8c801ac3318d996db848a64c
+Status: Downloaded newer image for nicolaka/netshoot:latest
+                    dP            dP                           dP
+                    88            88                           88
+88d888b. .d8888b. d8888P .d8888b. 88d888b. .d8888b. .d8888b. d8888P
+88'  `88 88ooood8   88   Y8ooooo. 88'  `88 88'  `88 88'  `88   88
+88    88 88.  ...   88         88 88    88 88.  .88 88.  .88   88
+dP    dP `88888P'   dP   `88888P' dP    dP `88888P' `88888P'   dP
+
+Welcome to Netshoot! (github.com/nicolaka/netshoot)
+Version: 0.12
+
+
+
+
+ 7e83f7d278e6  ~  dig mysql
+
+; <<>> DiG 9.18.21 <<>> mysql
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 3641
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;mysql.                         IN      A
+
+;; ANSWER SECTION:
+mysql.                  600     IN      A       172.18.0.2
+
+;; Query time: 0 msec
+;; SERVER: 127.0.0.11#53(127.0.0.11) (UDP)
+;; WHEN: Fri Mar 01 11:02:38 UTC 2024
+;; MSG SIZE  rcvd: 44
+
+
+ 7e83f7d278e6  ~  docker run -dp 127.0.0.1:3000:3000 `
+  -w /app -v "$(pwd):/app" `
+  --network todo-app `
+  -e MYSQL_HOST=mysql `
+  -e MYSQL_USER=root `
+  -e MYSQL_PASSWORD=secret `
+  -e MYSQL_DB=todos `
+  node:18-alpine `
+  sh -c "yarn install && yarn run dev"
+zsh: command not found: -w
+zsh: command not found: docker
+zsh: command not found: -e
+zsh: command not found: --network
+zsh: command not found: -e
+zsh: command not found: -e
+zsh: command not found: node:18-alpine
+zsh: command not found: -e
+sh: yarn: not found
+
+ 7e83f7d278e6  ~  exit
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker run -dp 127.0.0.1:3000:3000 `
+docker: invalid reference format.
+See 'docker run --help'.
+
+C:\Users\chait\docker_tutorial\getting-started-app>  -w /app -v "$(pwd):/app" `
+'-w' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\chait\docker_tutorial\getting-started-app>  --network todo-app `
+'--network' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\chait\docker_tutorial\getting-started-app>  -e MYSQL_HOST=mysql `
+'-e' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\chait\docker_tutorial\getting-started-app>  -e MYSQL_USER=root `
+'-e' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\chait\docker_tutorial\getting-started-app>  -e MYSQL_PASSWORD=secret `
+'-e' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\chait\docker_tutorial\getting-started-app>  -e MYSQL_DB=todos `
+'-e' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\chait\docker_tutorial\getting-started-app>  node:18-alpine `
+The filename, directory name, or volume label syntax is incorrect.
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker run -dp 127.0.0.1:3000:3000 ^
+More?   -w /app -v "%cd%:/app" ^
+More?   --network todo-app ^
+More?   -e MYSQL_HOST=mysql ^
+More?   -e MYSQL_USER=root ^
+More?   -e MYSQL_PASSWORD=secret ^
+More?   -e MYSQL_DB=todos ^
+More?   node:18-alpine ^
+More?   sh -c "yarn install && yarn run dev"
+Unable to find image 'node:18-alpine' locally
+18-alpine: Pulling from library/node
+4abcf2066143: Already exists
+e7ced292c644: Already exists
+b32c0114bba5: Already exists
+f3748d9674b0: Already exists
+Digest: sha256:ca9f6cb0466f9638e59e0c249d335a07c867cd50c429b5c7830dda1bed584649
+Status: Downloaded newer image for node:18-alpine
+4a54c557717725e4d73e8f2baa138843ae598b2951bdbf846edbeedcccbbae4e
+docker: Error response from daemon: driver failed programming external connectivity on endpoint sharp_morse (eb4d1a44b5c820ba67b460f3c4b1c41c0bb9230eca5f0c360bad5bd05f7068ca): Bind for 127.0.0.1:3000 failed: port is already allocated.
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker ps
+CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS          PORTS                      NAMES
+a2f7f0c72999   mysql:8.0         "docker-entrypoint.s…"   19 minutes ago   Up 19 minutes   3306/tcp, 33060/tcp        boring_cannon
+87272c17af29   getting-started   "docker-entrypoint.s…"   40 minutes ago   Up 40 minutes   127.0.0.1:3000->3000/tcp   practical_wright
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker rm -f 87272c17af29
+87272c17af29
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker run -dp 127.0.0.1:3000:3000 ^
+More?   -w /app -v "%cd%:/app" ^
+More?   --network todo-app ^
+More?   -e MYSQL_HOST=mysql ^
+More?   -e MYSQL_USER=root ^
+More?   -e MYSQL_PASSWORD=secret ^
+More?   -e MYSQL_DB=todos ^
+More?   node:18-alpine ^
+More?   sh -c "yarn install && yarn run dev"
+f90e6d90879bd214d1c0154a70ea4f3195e4e7d93c1c19ee4e7491ed3b1a7276
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker ps
+CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS          PORTS                      NAMES
+f90e6d90879b   node:18-alpine   "docker-entrypoint.s…"   5 seconds ago    Up 4 seconds    127.0.0.1:3000->3000/tcp   zen_blackburn
+a2f7f0c72999   mysql:8.0        "docker-entrypoint.s…"   20 minutes ago   Up 20 minutes   3306/tcp, 33060/tcp        boring_cannon
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker logs -f f90e6d90879b
+yarn install v1.22.19
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+Done in 60.04s.
+yarn run v1.22.19
+$ nodemon -L src/index.js
+[nodemon] 2.0.20
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node src/index.js`
+Waiting for mysql:3306.
+Connected!
+Connected to mysql db at host mysql
+Listening on port 3000
+^C
+C:\Users\chait\docker_tutorial\getting-started-app>docker ps
+CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS          PORTS                      NAMES
+f90e6d90879b   node:18-alpine   "docker-entrypoint.s…"   4 minutes ago    Up 4 minutes    127.0.0.1:3000->3000/tcp   zen_blackburn
+a2f7f0c72999   mysql:8.0        "docker-entrypoint.s…"   24 minutes ago   Up 24 minutes   3306/tcp, 33060/tcp        boring_cannon
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker exec -it a2f7f0c72999 mysql -p todos
+Enter password:
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show tables
+    -> ;
++-----------------+
+| Tables_in_todos |
++-----------------+
+| todo_items      |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from todo_items
+    -> ;
++--------------------------------------+------------------------+-----------+
+| id                                   | name                   | completed |
++--------------------------------------+------------------------+-----------+
+| c680ea35-bac3-42c4-b2fd-25a80de85e0e | need to work hard      |         0 |
+| d27ac413-3949-45d8-96ff-8540ad98502e | need to stay motivated |         0 |
+| 924632b3-581a-4dd2-a28a-f19283262eb6 | need to become faster  |         0 |
++--------------------------------------+------------------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> exit
+Bye
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker rm -f f90e6d90879b
+Error response from daemon: cannot remove container "/zen_blackburn": could not kill: container f90e6d90879b PID 5974 is zombie and can not be killed. Use the --init option when creating containers to run an init inside the container that forwards signals and reaps processes
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker ps
+CONTAINER ID   IMAGE       COMMAND                  CREATED          STATUS          PORTS                 NAMES
+a2f7f0c72999   mysql:8.0   "docker-entrypoint.s…"   46 minutes ago   Up 46 minutes   3306/tcp, 33060/tcp   boring_cannon
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker rm -f a2f7f0c72999
+a2f7f0c72999
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker compose up -d
+yaml: unmarshal errors:
+  line 15: mapping key "app" already defined at line 2
+
+C:\Users\chait\docker_tutorial\getting-started-app>docker compose up -d
+[+] Running 1/4
+ - Network getting-started-app_default           Created                                                                                             476.0s
+ - Volume "getting-started-app_todo-mysql-data"  Created                                                                                             476.0s
+ ✔ Container getting-started-app-mysql-1         Started                                                                                               0.4s
+ - Container getting-started-app-app-1           Starting                                                                                            476.0s
+canceled
